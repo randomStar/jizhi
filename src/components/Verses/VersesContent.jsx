@@ -63,10 +63,13 @@ const VersesContent = (props) => {
     },
     engineOption,
     isVertical,
+    showFullContentChecked,
   } = props;
-
+  const fullContent = props.verses.origin.content;
   const searchLink = `${engineOption}${author} ${title}`;
-  const filteredContent = isVertical ? pureWords(content) : content;
+  console.log(fullContent);
+  const contentToShow = showFullContentChecked ? fullContent : content;
+  const filteredContent = isVertical ? pureWords(contentToShow) : contentToShow;
 
   return (
     <>
@@ -90,6 +93,7 @@ VersesContent.propTypes = {
   engineOption: PropTypes.string,
   fontName: PropTypes.string,
   isDarkMode: PropTypes.bool,
+  showFullContentChecked: PropTypes.bool,
 };
 
 export default VersesContent;

@@ -50,6 +50,8 @@ const MenuContent = (props) => {
     onDarkModeChange,
     isFontLoading,
     waveColor,
+    showFullContentChecked,
+    onShowFullContentChange,
   } = props;
 
   const bgOptions = [
@@ -100,6 +102,11 @@ const MenuContent = (props) => {
       name: '保留颜色名称',
       checkedState: colorStayChecked,
       onChangeFunc: onColorStayChange,
+    },
+    {
+      name: '显示全文',
+      checkedState: showFullContentChecked,
+      onChangeFunc: onShowFullContentChange,
     },
   ];
 
@@ -189,7 +196,7 @@ const MenuContent = (props) => {
   ];
 
   return (
-    <Pane display="flex" height={300}>
+    <Pane display="flex" height={330}>
       <Tablist width={80} margin={10}>
         {tabs.map(({ tabName }, index) => (
           <SidebarTab
@@ -243,6 +250,8 @@ MenuContent.propTypes = {
   onFontTypeChange: PropTypes.func,
   isFontLoading: PropTypes.bool,
   waveColor: PropTypes.object,
+  showFullContentChecked: PropTypes.bool,
+  onShowFullContentChange: PropTypes.func,
 };
 
 export default MenuContent;

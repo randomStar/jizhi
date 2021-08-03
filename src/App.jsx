@@ -41,6 +41,7 @@ class App extends Component {
       focused: false,
       fontName: DEFAULT_FONT,
       waveColor: pickColor(false),
+      showFullContentChecked: false,
     };
   }
 
@@ -72,12 +73,12 @@ class App extends Component {
         'fontName',
         'fonts',
         'darkModeChecked',
+        'showFullContentChecked',
       ],
       (res) => {
         if (res.fonts && res.fontName === res.fonts.fontName) {
           insertFont(res.fonts.value);
         }
-
         this.setState({
           showSearchBarChecked: !!res.showSearchBarChecked,
           darkModeChecked: !!res.darkModeChecked,
@@ -90,6 +91,7 @@ class App extends Component {
           engineOption: res.engineOption || GOOGLE_SEARCH,
           fontName: res.fontName || DEFAULT_FONT,
           waveColor: pickColor(!!res.darkModeChecked),
+          showFullContentChecked: !!res.showFullContentChecked,
         });
       }
     );
@@ -166,6 +168,17 @@ class App extends Component {
     });
   };
 
+  handleShowFullContentChange = () => {
+    this.setState(
+      (state) => ({
+        showFullContentChecked: !state.showFullContentChecked,
+      }),
+      () => {
+        Storager.set({ showFullContentChecked: this.state.showFullContentChecked });
+      }
+    );
+  };
+
   handleKeyDown = ({ keyCode, altKey }) => {
     // space
     if (keyCode === 32) this.setState((state) => ({ isPlaying: !state.isPlaying }));
@@ -225,6 +238,7 @@ class App extends Component {
       darkModeChecked,
       waveColor,
       isFontLoading,
+      showFullContentChecked,
     } = this.state;
     const sketches = { blobs, waves };
 
@@ -248,6 +262,7 @@ class App extends Component {
           engineOption={engineOption}
           isDarkMode={darkModeChecked}
           fontName={fontName}
+          showFullContentChecked={showFullContentChecked}
         />
         <P5Wrapper
           sketch={sketches[selected]}
@@ -276,6 +291,8 @@ class App extends Component {
           onFontTypeChange={this.handleFontTypeChange}
           isFontLoading={isFontLoading}
           waveColor={waveColor}
+          showFullContentChecked={showFullContentChecked}
+          onShowFullContentChange={this.handleShowFullContentChange}
         >
           {errMessage && (
             <div style={{ height: 30 }}>
