@@ -168,17 +168,6 @@ class App extends Component {
     });
   };
 
-  handleShowFullContentChange = () => {
-    this.setState(
-      (state) => ({
-        showFullContentChecked: !state.showFullContentChecked,
-      }),
-      () => {
-        Storager.set({ showFullContentChecked: this.state.showFullContentChecked });
-      }
-    );
-  };
-
   handleKeyDown = ({ keyCode, altKey }) => {
     // space
     if (keyCode === 32) this.setState((state) => ({ isPlaying: !state.isPlaying }));
@@ -238,7 +227,6 @@ class App extends Component {
       darkModeChecked,
       waveColor,
       isFontLoading,
-      showFullContentChecked,
     } = this.state;
     const sketches = { blobs, waves };
 
@@ -262,7 +250,6 @@ class App extends Component {
           engineOption={engineOption}
           isDarkMode={darkModeChecked}
           fontName={fontName}
-          showFullContentChecked={showFullContentChecked}
         />
         <P5Wrapper
           sketch={sketches[selected]}
@@ -291,8 +278,6 @@ class App extends Component {
           onFontTypeChange={this.handleFontTypeChange}
           isFontLoading={isFontLoading}
           waveColor={waveColor}
-          showFullContentChecked={showFullContentChecked}
-          onShowFullContentChange={this.handleShowFullContentChange}
         >
           {errMessage && (
             <div style={{ height: 30 }}>

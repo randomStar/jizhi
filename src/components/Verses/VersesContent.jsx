@@ -15,6 +15,14 @@ const Content = styled.div`
     `};
 `;
 
+const FullContent = styled.div`
+  margin-bottom: 1em;
+  font-size: calc(6px + 1vw);
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.3);
+`;
+
 const Origin = styled.div`
   display: flex;
   margin-top: 1em;
@@ -31,7 +39,6 @@ const Origin = styled.div`
       word-break: keep-all;
     `};
 `;
-
 const Stamp = styled.span`
   color: #fff;
   background-color: #c20000;
@@ -63,14 +70,12 @@ const VersesContent = (props) => {
     },
     engineOption,
     isVertical,
-    showFullContentChecked,
   } = props;
-  const fullContent = props.verses.origin.content;
+  let fullContent = props.verses.origin.content;
   const searchLink = `${engineOption}${author} ${title}`;
-  console.log(fullContent);
-  const contentToShow = showFullContentChecked ? fullContent : content;
-  const filteredContent = isVertical ? pureWords(contentToShow) : contentToShow;
-
+  const filteredContent = isVertical ? pureWords(content) : content;
+  fullContent = fullContent.length > 10 ? fullContent.slice(0, 10) : fullContent;
+  const listItems = fullContent.map((sentence, idx) => <ol key={idx}>{sentence + ''}</ol>);
   return (
     <>
       <Content isVertical={isVertical}>{filteredContent}</Content>
@@ -83,6 +88,7 @@ const VersesContent = (props) => {
           <Icon size={14} icon="search-text" color="black" />
         </Search>
       </Origin>
+      <FullContent> {listItems} </FullContent>
     </>
   );
 };
@@ -93,7 +99,6 @@ VersesContent.propTypes = {
   engineOption: PropTypes.string,
   fontName: PropTypes.string,
   isDarkMode: PropTypes.bool,
-  showFullContentChecked: PropTypes.bool,
 };
 
 export default VersesContent;

@@ -50,8 +50,6 @@ const MenuContent = (props) => {
     onDarkModeChange,
     isFontLoading,
     waveColor,
-    showFullContentChecked,
-    onShowFullContentChange,
   } = props;
 
   const bgOptions = [
@@ -102,11 +100,6 @@ const MenuContent = (props) => {
       name: '保留颜色名称',
       checkedState: colorStayChecked,
       onChangeFunc: onColorStayChange,
-    },
-    {
-      name: '显示全文',
-      checkedState: showFullContentChecked,
-      onChangeFunc: onShowFullContentChange,
     },
   ];
 
@@ -250,8 +243,6 @@ MenuContent.propTypes = {
   onFontTypeChange: PropTypes.func,
   isFontLoading: PropTypes.bool,
   waveColor: PropTypes.object,
-  showFullContentChecked: PropTypes.bool,
-  onShowFullContentChange: PropTypes.func,
 };
 
 export default MenuContent;

@@ -20,7 +20,7 @@ const MenuButton = styled(Icon)`
   }
 
   ${(props) =>
-    props.isOpen &&
+    props.isopen &&
     css`
       opacity: 1;
       transform: rotate(45deg) scale(1.1);
@@ -28,14 +28,14 @@ const MenuButton = styled(Icon)`
 `;
 
 const ConfigMenu = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isopen, setIsopen] = useState(false);
 
   const handleOnOpen = () => {
-    setIsOpen(true);
+    setIsopen(true);
   };
 
   const handleOnClose = () => {
-    setIsOpen(false);
+    setIsopen(false);
   };
 
   return (
@@ -46,7 +46,13 @@ const ConfigMenu = (props) => {
         onClose={handleOnClose}
         content={<MenuContent {...props} />}
       >
-        <MenuButton id="menu-button" icon="cog" size={20} color="white" isOpen={isOpen} />
+        <MenuButton
+          id="menu-button"
+          icon="cog"
+          size={20}
+          color="white"
+          isopen={isopen.toString()}
+        />
       </Popover>
     </MenuWrapper>
   );
